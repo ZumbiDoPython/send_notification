@@ -166,7 +166,7 @@ def cria_att_ctt (URLBLIP, KEYBLIP, identity, name):
 
         
     except HTTPError as e:
-        EnviaComunicacao(str('Notificação no Blip rejeitada - StatusCode: ', e.code, ' Resposta: ', e.read()), ADMIN, "Falha Bots2U - Leads", COPIAADMIN)
+        
         print('Notificação no Blip rejeitada - StatusCode: ', e.code, ' Resposta: ', e.read(), ' Payload: ', payBlip) 
     
     if(status == "Failure"):
@@ -193,7 +193,7 @@ def cria_att_ctt (URLBLIP, KEYBLIP, identity, name):
             BlipResp = request.urlopen(BlipReq).read().decode()
             print('Lead no Blip aceito') 
         except HTTPError as e:
-            EnviaComunicacao(str('Notificação no Blip rejeitada - StatusCode: ', e.code, ' Resposta: ', e.read()), ADMIN, "Falha Bots2U - Leads", COPIAADMIN)
+            
             print('Notificação no Blip rejeitada - StatusCode: ', e.code, ' Resposta: ', e.read(), ' Payload: ', payBlip)
 
     else:
