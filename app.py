@@ -65,7 +65,7 @@ def verification_phone (phone, URLBLIP, KEYBLIP):
 #requsição que definifinitavemente envia a notificação para o cliente
 #Mudar para modelo com váriavel
 #Link: https://docs.blip.ai/#sending-a-notification-active-message a segunda req dessa sessão
-def send_notification (URLBLIP, KEYBLIP, namespace, template_name, identity):
+def send_notification (KEYBLIP, namespace, template_name, identity):
 
     id = str(uuid.uuid4())
     print("Monta Body")
@@ -293,7 +293,7 @@ def send_notification ():
     response_notification = send_notification (URLBLIP = URLBLIP, KEYBLIP = KEYBLIP, namespace = namespace, template_name = template_name, identity = identity)
 
     #Levar o Cliente para o bloco correto
-    response_state = change_state(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, state_id = state_id, flow_id = flow_id)
+    response_state = change_state( KEYBLIP = KEYBLIP,identity = identity, state_id = state_id, flow_id = flow_id)
     
     #Coloca o usuário dentro do bot desejado, e no bloco selecionado anteriomente
     response_bot_change = change_bot(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP, identity = identity, id_bot = id_bot)
