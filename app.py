@@ -268,12 +268,15 @@ def send_notification ():
 
     #Ajustar Telefone Para Verificação do Número
     adjustment_phone = regex_num(phone=phone)
+    print("Ajustar Telefone Para Verificação do Número")
 
     #Verifica o Número na API do WhatsApp
     response_verification = verification_phone(phone = adjustment_phone, URLBLIP = URLBLIP, KEYBLIP = KEYBLIP)
+    print("Verifica o Número na API do WhatsApp")
 
     #Carrega Informações retornadas no formato de JSON
     data_verification = json.loads(response_verification)
+    print("Carrega Informações retornadas no formato de JSON")
 
     #Verifica Se Existe Nome vinculado a conta
     if ("fullName" in response_verification):
@@ -291,6 +294,7 @@ def send_notification ():
     
     #Coloca o usuário dentro do bot desejado, e no bloco selecionado anteriomente
     response_bot_change = change_bot(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP, identity = identity, id_bot = id_bot)
+    print("Coloca o usuário dentro do bot desejado, e no bloco selecionado anteriomente")
 
     #atuaiza dados do cliente de acordo com as informações passadas
     cria_att_ctt (URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, name = name)
