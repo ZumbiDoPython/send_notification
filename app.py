@@ -3,6 +3,7 @@ import uuid
 from urllib import request, parse
 from urllib.error import URLError, HTTPError
 from flask import Flask
+import os
 from flask import jsonify
 
 
@@ -295,6 +296,10 @@ def send_notification ():
 
 
     return data_verification
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
 #{
 #    "phone": "11 956927573",
