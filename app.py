@@ -290,10 +290,10 @@ def send_notification ():
     identity = data_verification ['resource']['alternativeAccount']
 
     #Enviar Notificação
-    response_notification = send_notification (URLBLIP = URLBLIP, KEYBLIP = KEYBLIP, namespace = namespace, template_name = template_name, identity = identity)
+    response_notification = send_notification (KEYBLIP = KEYBLIP, namespace = namespace, template_name = template_name, identity = identity)
 
     #Levar o Cliente para o bloco correto
-    response_state = change_state( KEYBLIP = KEYBLIP,identity = identity, state_id = state_id, flow_id = flow_id)
+    response_state = change_state(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, state_id = state_id, flow_id = flow_id)
     
     #Coloca o usuário dentro do bot desejado, e no bloco selecionado anteriomente
     response_bot_change = change_bot(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP, identity = identity, id_bot = id_bot)
