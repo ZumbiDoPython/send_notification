@@ -238,6 +238,58 @@ def nao_entre_em_panico():
         return jsonify({"42": "a resposta para a vida, o universo e tudo mais"})
     return jsonify({"message": "Não entre em pânico!"})
 
+@app.route('/send_notification', methods=['POST'])
+
+def send_notification ():
+
+    from flask import request
+    
+    data = request.get_json()
+    
+
+    #ler JSON
+    state_id=data['state_id']
+    flow_id=data['flow_id']
+    template_name=data['template']
+    namespace=data['namespace']
+    KEYBLIP = data['key']
+    phone=data['phone']
+    name=data['name']
+    id_bot=data['id_bot']
+
+    #Ajustar Telefone Para Verificação do Número
+    adjustment_phone = regex_num(phone=phone)
+
+    #Verifica o Número na API do WhatsApp
+    response_verification = verification_phone(phone = adjustment_phone, URLBLIP = URLBLIP, KEYBLIP = KEYBLIP)
+
+    #Carrega Informações retornadas no formato de JSON
+    data_verification = json.loads(response_verification)
+
+    #Verifica Se Existe Nome vinculado a conta
+    if ("fullName" in response_verification):
+
+            name = data_verification ['resource']['fullName']
+
+    #Identifica o Identity do número no whatsapp       
+    identity = data_verification ['resource']['alternativeAccount']
+
+    #Enviar Notificação
+    response_notification = send_notification (URLBLIP = URLBLIP, KEYBLIP = KEYBLIP, namespace = namespace, template_name = template_name, identity = identity)
+
+    #Levar o Cliente para o bloco correto
+    response_state = change_state(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, state_id = state_id, flow_id = flow_id)
+    
+    #Coloca o usuário dentro do bot desejado, e no bloco selecionado anteriomente
+    response_bot_change = change_bot(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP, identity = identity, id_bot = id_bot)
+
+    #atuaiza dados do cliente de acordo com as informações passadas
+    cria_att_ctt (URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, name = name)
+
+
+
+    return data_verification
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
