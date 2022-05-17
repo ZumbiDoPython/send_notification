@@ -11,7 +11,6 @@ from flask import Flask, jsonify
 URLBLIP = ["https://msging.net/commands","https://http.msging.net/messages","https://http.msging.net/notifications"]
 
 #KEYBLIP é chave do bot ou roteador que tenha o whatsapp conectado
-KEYBLIP = ""
 
 #namespace é estático sempre será o mesmo
 namespace = ''
