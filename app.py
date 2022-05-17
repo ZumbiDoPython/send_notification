@@ -237,6 +237,7 @@ def regex_num (phone):
 #endpoint hello world teste
 
 app = Flask(__name__)
+
 @app.route('/')
 def hello_world():
     return 'Hello World!'
@@ -298,7 +299,7 @@ def send_notification ():
     return data_verification
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5001))
     app.run(host='0.0.0.0', port=port)
 
 #{
