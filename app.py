@@ -289,7 +289,7 @@ def send_notification ():
     identity = data_verification ['resource']['alternativeAccount']
 
     #Enviar Notificação
-    response_notification = send_notification (KEYBLIP = KEYBLIP, namespace = namespace, template_name = template_name, identity = identity)
+    response_notification = send_notification (namespace = namespace, template_name = template_name, identity = identity)
 
     #Levar o Cliente para o bloco correto
     response_state = change_state(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, state_id = state_id, flow_id = flow_id)
