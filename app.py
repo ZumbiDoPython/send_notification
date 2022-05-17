@@ -1,14 +1,10 @@
 import json
-import email
-import imaplib
 import uuid
-import re
 from urllib import request, parse
 from urllib.error import URLError, HTTPError
-import csv
 from flask import Flask
 from flask import jsonify
-from flask_cors import CORS
+
 
 #LINK PARA ENTENDER O ENVIO DE NOTIFICAÇÃO POR API: https://help.blip.ai/hc/pt-br/articles/4474382664855-Como-enviar-notificações-WhatsApp-via-API-do-Blip
 
@@ -16,7 +12,7 @@ from flask_cors import CORS
 URLBLIP = ["https://msging.net/commands","https://http.msging.net/messages","https://http.msging.net/notifications"]
 
 #KEYBLIP é chave do bot ou roteador que tenha o whatsapp conectado
-KEYBLIP = "Key "
+KEYBLIP = ""
 
 #namespace é estático sempre será o mesmo
 namespace = ''
