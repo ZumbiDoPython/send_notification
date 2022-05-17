@@ -11,6 +11,7 @@ from flask import Flask, jsonify
 URLBLIP = ["https://msging.net/commands","https://http.msging.net/messages","https://http.msging.net/notifications"]
 
 #KEYBLIP é chave do bot ou roteador que tenha o whatsapp conectado
+KEYBLIP = ""
 
 #namespace é estático sempre será o mesmo
 namespace = ''
@@ -287,7 +288,7 @@ def send():
     identity = data_verification ['resource']['alternativeAccount']
 
     #Enviar Notificação
-    response_notification = send_notification(URLBLIP = URLBLIP,namespace = namespace, template_name = template_name, identity = identity)
+    response_notification = send_notification(URLBLIP = URLBLIP,KEYBLIP = KEYBLIP,namespace = namespace, template_name = template_name, identity = identity)
 
     #Levar o Cliente para o bloco correto
     response_state = change_state(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, state_id = state_id, flow_id = flow_id)
