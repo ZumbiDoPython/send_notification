@@ -1,4 +1,8 @@
 import os
+import json
+import uuid
+from urllib import request, parse
+from urllib.error import URLError, HTTPError
 from flask import Flask, jsonify, request
 
 #LINK PARA ENTENDER O ENVIO DE NOTIFICAÇÃO POR API: https://help.blip.ai/hc/pt-br/articles/4474382664855-Como-enviar-notificações-WhatsApp-via-API-do-Blip
