@@ -68,6 +68,7 @@ def verification_phone (phone, URLBLIP, KEYBLIP):
 def send_notification (URLBLIP, KEYBLIP, namespace, template_name, identity):
 
     id = str(uuid.uuid4())
+    print("Monta Body")
     payBlip =  json.dumps({
             
     "id":id,
@@ -85,7 +86,9 @@ def send_notification (URLBLIP, KEYBLIP, namespace, template_name, identity):
     }}}
   
     }).encode('utf-8')
+    print("Monta Requisição")
     BlipReq = request.Request(URLBLIP[1],data = payBlip, headers={'content-type': 'application/json', 'Authorization': KEYBLIP})
+    print("Faz Requisição")
     BlipResp = request.urlopen(BlipReq).read().decode()
    
     return BlipResp
