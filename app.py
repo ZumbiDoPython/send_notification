@@ -249,7 +249,7 @@ def nao_entre_em_panico():
 
 @app.route('/send_notification', methods=['POST'])
 
-def send_notification ():
+def send():
 
     from flask import request
 
