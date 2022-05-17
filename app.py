@@ -250,6 +250,8 @@ def nao_entre_em_panico():
 def send_notification ():
 
     from flask import request
+
+    URLBLIP = ["https://msging.net/commands","https://http.msging.net/messages","https://http.msging.net/notifications"]
     
     data = request.get_json()
     
