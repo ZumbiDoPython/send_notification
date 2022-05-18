@@ -308,8 +308,6 @@ def send():
     #cria evento guardando a informação que a notificação foi enviada
     response_event = create_event (URLBLIP, KEYBLIP)
 
-    response_ctt = jsonify (response_ctt)
-
     #envia informações como retorno
     data_response = {
 
