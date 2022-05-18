@@ -264,13 +264,13 @@ def send():
     state_id=data['state_id']
     flow_id=data['flow_id']
     template_name=data['template']
-    namespace=data['namespace']
     phone=data['phone']
     name=data['name']
     id_bot=data['id_bot']
     jsonExtras = data['extras']
 
     KEYBLIP = request.headers.get('Authorization')
+    namespace = request.headers.get('namespace')
 
     #Ajustar Telefone Para Verificação do Número
     adjustment_phone = regex_num(phone=phone)
