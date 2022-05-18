@@ -272,9 +272,16 @@ def send():
     KEYBLIP = request.headers.get('Authorization')
     namespace = request.headers.get('namespace')
 
+
+    #identifica caso authorization não exista
     if(KEYBLIP == ""):
 
         return jsonify ({"erro":"Authorization não encontrado"})
+
+    #identifica caso name sapce não exista
+    if(namespace == ""):
+
+        return jsonify ({"erro":"namespace não encontrado"})
 
     #Ajustar Telefone Para Verificação do Número
     adjustment_phone = regex_num(phone=phone)
