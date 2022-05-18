@@ -176,35 +176,9 @@ def change_bot(URLBLIP, KEYBLIP, identity, id_bot):
 #Link Doc: https://docs.blip.ai/#update-a-contact
 def cria_att_ctt (URLBLIP, KEYBLIP, identity, name):
 
-    uri = "/contacts/" + identity
-
     id = str(uuid.uuid4())
     id = "send-notification-api-" + id
     payBlip =  json.dumps({
-        
-  "id": id,
-  "method": "get",
-  "uri": uri
-  
-}).encode('utf-8')
-    BlipReq = request.Request(URLBLIP[0],data = payBlip, headers={'content-type': 'application/json', 'Authorization': KEYBLIP})
-    BlipResp = request.urlopen(BlipReq).read().decode()
-    try:
-        BlipResp = request.urlopen(BlipReq).read().decode()
-        print('Lead no Blip aceito')
-        data = json.loads(BlipResp)
-        status = data['status']
-
-        
-    except HTTPError as e:
-        
-        print('Notificação no Blip rejeitada - StatusCode: ', e.code, ' Resposta: ', e.read(), ' Payload: ', payBlip) 
-    
-    if(status == "Failure"):
-    
-        id = str(uuid.uuid4())
-        id = "send-notification-api-" + id
-        payBlip =  json.dumps({
                 "id": id,
                 "method": "merge",
                 "type": "application/vnd.lime.contact+json",
@@ -219,20 +193,18 @@ def cria_att_ctt (URLBLIP, KEYBLIP, identity, name):
                 
           } 
         }).encode('utf-8')
-        BlipReq = request.Request(URLBLIP[0],data = payBlip, headers={'content-type': 'application/json', 'Authorization': KEYBLIP})
-        BlipResp = request.urlopen(BlipReq).read().decode()
-        try:
+    BlipReq = request.Request(URLBLIP[0],data = payBlip, headers={'content-type': 'application/json', 'Authorization': KEYBLIP})
+    BlipResp = request.urlopen(BlipReq).read().decode()
+    try:
             BlipResp = request.urlopen(BlipReq).read().decode()
-            print('Lead no Blip aceito') 
-        except HTTPError as e:
+
+            print('Lead no Blip aceito')
+
+            return BlipResp
+             
+    except HTTPError as e:
             
-            print('Notificação no Blip rejeitada - StatusCode: ', e.code, ' Resposta: ', e.read(), ' Payload: ', payBlip)
-
-    else:
-
-        status = data['status']
-
-        print("Lead Já Existente")
+        print('Notificação no Blip rejeitada - StatusCode: ', e.code, ' Resposta: ', e.read(), ' Payload: ', payBlip)  
 
 #ajusta telefone para padrão de auteticação BR da API
 def regex_num (phone):
