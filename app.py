@@ -281,7 +281,7 @@ def send():
         return jsonify ({"erro":"Authorization não encontrado"})
 
     #identifica caso name sapce não exista
-    if(namespace == ""):
+    if(namespace == "" or namespace == None):
 
         return jsonify ({"erro":"namespace não encontrado"})
 
