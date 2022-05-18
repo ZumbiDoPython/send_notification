@@ -174,12 +174,7 @@ def change_bot(URLBLIP, KEYBLIP, identity, id_bot):
 
 #requisição que cria ou atualiza o contato do cliente dentro do blip
 #Link Doc: https://docs.blip.ai/#update-a-contact
-def cria_att_ctt (URLBLIP, KEYBLIP, identity, name):
-
-    jsonExtras = {
-                    "email_agente":agent_email
-                    
-                }
+def cria_att_ctt (URLBLIP, KEYBLIP, identity, name, jsonExtras):
 
     id = str(uuid.uuid4())
     id = "send-notification-api-" + id
@@ -274,6 +269,7 @@ def send():
     phone=data['phone']
     name=data['name']
     id_bot=data['id_bot']
+    jsonExtras = data['extras']
 
     #Ajustar Telefone Para Verificação do Número
     adjustment_phone = regex_num(phone=phone)
@@ -306,7 +302,7 @@ def send():
     print("Coloca o usuário dentro do bot desejado, e no bloco selecionado anteriomente")
 
     #atuaiza dados do cliente de acordo com as informações passadas
-    response_ctt = cria_att_ctt (URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, name = name)
+    response_ctt = cria_att_ctt (URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, name = name, jsonExtras = jsonExtras)
 
     #cria evento guardando a informação que a notificação foi enviada
     response_event = create_event (URLBLIP, KEYBLIP)
