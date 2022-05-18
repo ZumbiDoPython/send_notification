@@ -265,11 +265,12 @@ def send():
     flow_id=data['flow_id']
     template_name=data['template']
     namespace=data['namespace']
-    KEYBLIP = data['key']
     phone=data['phone']
     name=data['name']
     id_bot=data['id_bot']
     jsonExtras = data['extras']
+
+    KEYBLIP = request.headers.get('Authorization')
 
     #Ajustar Telefone Para Verificação do Número
     adjustment_phone = regex_num(phone=phone)
