@@ -272,7 +272,7 @@ def send():
     KEYBLIP = request.headers.get('Authorization')
     namespace = request.headers.get('namespace')
 
-    print("Namespace:" + namespace)
+    print(namespace)
 
 
     #identifica caso authorization não exista
