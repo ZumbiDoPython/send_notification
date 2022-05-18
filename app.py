@@ -176,10 +176,10 @@ def change_bot(URLBLIP, KEYBLIP, identity, id_bot):
 #Link Doc: https://docs.blip.ai/#update-a-contact
 def cria_att_ctt (URLBLIP, KEYBLIP, identity, name):
 
-    jsonExtras = json.dumps({
+    jsonExtras = {
                     "email_agente":agent_email
                     
-                })
+                }
 
     id = str(uuid.uuid4())
     id = "send-notification-api-" + id
