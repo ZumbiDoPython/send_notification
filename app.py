@@ -309,7 +309,7 @@ def send():
     response_event = create_event (URLBLIP, KEYBLIP)
 
     #envia informações como retorno
-    data_response = {
+    data_response =json.dump ({
 
         "response_verification":data_verification,
         "response_change_bot":response_bot_change,
@@ -320,9 +320,20 @@ def send():
         "response_ctt":response_ctt
 
 
-    }
+    })
 
     return data_response
+
+#Modelo de Body Esperado
+#{
+#    "phone": "11 956927573",
+#    "name": "Pedro Mourão",
+#    "template": "nps_2022v1",
+#    "state_id": "47402715-0cd2-4c7c-ae79-4d347d93a9f9", 
+#    "flow_id": "3da8fb90-7a04-42c2-b83e-b0b6a15e2774",
+#    "id_bot": "apogeuprincipal",
+#    "extras": {"Teste":"o pai ta on"}
+#}
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
