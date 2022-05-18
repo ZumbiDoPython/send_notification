@@ -272,6 +272,10 @@ def send():
     KEYBLIP = request.headers.get('Authorization')
     namespace = request.headers.get('namespace')
 
+    if(KEYBLIP == ""):
+
+        return jsonify ({"erro":"Authorization não encontrado"})
+
     #Ajustar Telefone Para Verificação do Número
     adjustment_phone = regex_num(phone=phone)
     print("Ajustar Telefone Para Verificação do Número")
