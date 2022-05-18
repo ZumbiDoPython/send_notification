@@ -37,6 +37,30 @@ agent_email = ""
 data_response = {}
 
 #requisição que registra o evento com dados do envio
+#Link: https://docs.blip.ai/#create-an-event
+def create_event (URLBLIP, KEYBLIP):
+
+    print("Evento Criado")
+    id = str(uuid.uuid4())
+    id = "send-notification-api-" + id
+    print("Monta Body")
+    payBlip =  json.dumps({
+    "id": id,
+    "to": "postmaster@analytics.msging.net",
+    "method": "set",
+    "type": "application/vnd.iris.eventTrack+json",
+    "uri": "/event-track",
+    "resource": {
+        "category": "notifications",
+        "action": "send"
+  }
+}).encode('utf-8')
+    print("Monta Requisição")
+    BlipReq = request.Request(URLBLIP[0],data = payBlip, headers={'content-type': 'application/json', 'Authorization': KEYBLIP})
+    print("Faz Requisição")
+    BlipResp = request.urlopen(BlipReq).read().decode()
+   
+    return BlipResp
 
 #requisição que verifica o número com o grupo meta
 #Link: https://docs.blip.ai/#sending-a-notification-active-message a primeira req dessa sessão
@@ -308,15 +332,21 @@ def send():
     print("Coloca o usuário dentro do bot desejado, e no bloco selecionado anteriomente")
 
     #atuaiza dados do cliente de acordo com as informações passadas
-    cria_att_ctt (URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, name = name)
+    response_ctt = cria_att_ctt (URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, name = name)
 
+    #cria evento guardando a informação que a notificação foi enviada
+    response_event = create_event (URLBLIP, KEYBLIP)
+
+    #envia informações como retorno
     data_response = {
 
         "response_verification":data_verification,
         "response_change_bot":response_bot_change,
         "response_change_state":response_state,
         "response_send_notification":response_notification,
-        "phone_number":adjustment_phone
+        "phone_number":adjustment_phone,
+        "response_event":response_event,
+        "response_ctt":response_ctt
 
 
     }
