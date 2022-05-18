@@ -309,7 +309,7 @@ def send():
     response_event = create_event (URLBLIP, KEYBLIP)
 
     #envia informações como retorno
-    data_response =json.dump ({
+    data_response = {
 
         "response_verification":data_verification,
         "response_change_bot":response_bot_change,
@@ -320,9 +320,9 @@ def send():
         "response_ctt":response_ctt
 
 
-    })
+    }
 
-    return data_response
+    return jsonify (data_response)
 
 #Modelo de Body Esperado
 #{
