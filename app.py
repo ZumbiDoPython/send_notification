@@ -276,7 +276,7 @@ def send():
 
 
     #identifica caso authorization não exista
-    if(KEYBLIP == ""):
+    if(KEYBLIP == "" or KEYBLIP == None):
 
         return jsonify ({"erro":"Authorization não encontrado"})
 
