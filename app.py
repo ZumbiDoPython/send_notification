@@ -34,6 +34,8 @@ name = "Nome Do Cliente"
 #variavael em que vai enviar o email do agente que efetuou o disparo 
 agent_email = ""
 
+data_response = {}
+
 #requisição que verifica o número com o grupo meta
 #Link: https://docs.blip.ai/#sending-a-notification-active-message a primeira req dessa sessão
 def verification_phone (phone, URLBLIP, KEYBLIP):
@@ -300,9 +302,18 @@ def send():
     #atuaiza dados do cliente de acordo com as informações passadas
     cria_att_ctt (URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, name = name)
 
+    data_response = {
+
+        "response_verification":data_verification,
+        "response_change_bot":response_bot_change,
+        "response_change_state":response_state,
+        "response_send_notification":response_notification,
+        "phone_numeber":adjustment_phone
 
 
-    return data_verification
+    }
+
+    return data_response
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
