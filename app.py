@@ -36,6 +36,8 @@ agent_email = ""
 
 data_response = {}
 
+#requisição que registra o evento com dados do envio
+
 #requisição que verifica o número com o grupo meta
 #Link: https://docs.blip.ai/#sending-a-notification-active-message a primeira req dessa sessão
 def verification_phone (phone, URLBLIP, KEYBLIP):
@@ -43,6 +45,7 @@ def verification_phone (phone, URLBLIP, KEYBLIP):
     name = "Erro"
     
     id = str(uuid.uuid4())
+    id = "send-notification-api-" + id
     payBlip =  json.dumps({
         
   "id": id,
@@ -70,6 +73,7 @@ def verification_phone (phone, URLBLIP, KEYBLIP):
 def send_notification(URLBLIP ,KEYBLIP, namespace, template_name, identity):
 
     id = str(uuid.uuid4())
+    id = "send-notification-api-" + id
     print("Monta Body")
     payBlip =  json.dumps({
             
@@ -100,6 +104,7 @@ def send_notification(URLBLIP ,KEYBLIP, namespace, template_name, identity):
 def change_state(URLBLIP, KEYBLIP, identity, flow_id, state_id):
 
     uri = "/contexts/"+identity+"/stateid@"+flow_id 
+    id = "send-notification-api-" + id
     id = str(uuid.uuid4())
     payBlip =  json.dumps({
         
@@ -124,6 +129,7 @@ def change_bot(URLBLIP, KEYBLIP, identity, id_bot):
 
     uri = "/contexts/"+identity+"/master-state"
     id = str(uuid.uuid4())
+    id = "send-notification-api-" + id
     id_bot = id_bot + "@msging.net"
     payBlip =  json.dumps({
         
@@ -149,6 +155,7 @@ def cria_att_ctt (URLBLIP, KEYBLIP, identity, name):
     uri = "/contacts/" + identity
 
     id = str(uuid.uuid4())
+    id = "send-notification-api-" + id
     payBlip =  json.dumps({
         
   "id": id,
@@ -172,6 +179,7 @@ def cria_att_ctt (URLBLIP, KEYBLIP, identity, name):
     if(status == "Failure"):
     
         id = str(uuid.uuid4())
+        id = "send-notification-api-" + id
         payBlip =  json.dumps({
                 "id": id,
                 "method": "merge",
@@ -308,7 +316,7 @@ def send():
         "response_change_bot":response_bot_change,
         "response_change_state":response_state,
         "response_send_notification":response_notification,
-        "phone_numeber":adjustment_phone
+        "phone_number":adjustment_phone
 
 
     }
