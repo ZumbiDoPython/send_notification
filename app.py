@@ -104,8 +104,8 @@ def send_notification(URLBLIP ,KEYBLIP, namespace, template_name, identity):
 def change_state(URLBLIP, KEYBLIP, identity, flow_id, state_id):
 
     uri = "/contexts/"+identity+"/stateid@"+flow_id 
-    id = "send-notification-api-" + id
     id = str(uuid.uuid4())
+    id = "send-notification-api-" + id
     payBlip =  json.dumps({
         
   "id": id,
