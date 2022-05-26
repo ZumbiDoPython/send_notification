@@ -3,6 +3,7 @@ import json
 import uuid
 from urllib import request, parse
 from urllib.error import URLError, HTTPError
+from certifi import contents
 from flask import Flask, jsonify
 
 #LINK PARA ENTENDER O ENVIO DE NOTIFICAÇÃO POR API: https://help.blip.ai/hc/pt-br/articles/4474382664855-Como-enviar-notificações-WhatsApp-via-API-do-Blip
@@ -35,6 +36,37 @@ name = "Nome Do Cliente"
 agent_email = ""
 
 data_response = {}
+
+#envio de notificação com components
+#Link: https://docs.blip.ai/#sending-a-notification-active-message a segunda req dessa sessão
+def send_notification_components(URLBLIP ,KEYBLIP, namespace, template_name, identity, components):
+
+    id = str(uuid.uuid4())
+    id = "send-notification-api-" + id
+    print("Monta Body")
+    payBlip =  json.dumps({
+            
+    "id":id,
+    "to":identity,
+    "type":"application/json",
+    "content":{
+    "type":"template",
+    "template":{
+        "namespace":namespace,
+        "name":template_name,
+        "language":{
+        "code":"pt_BR",
+        "policy":"deterministic",
+        "components":components
+
+    }}}
+  
+    }).encode('utf-8')
+    print("Monta Requisição")
+    BlipReq = request.Request(URLBLIP[1],data = payBlip, headers={'content-type': 'application/json', 'Authorization': KEYBLIP})
+    print("Faz Requisição")
+    BlipResp = request.urlopen(BlipReq).read().decode()
+   
 
 #requisição que registra o evento com dados do envio
 #Link: https://docs.blip.ai/#create-an-event
@@ -268,6 +300,7 @@ def send():
     name=data['name']
     id_bot=data['id_bot']
     jsonExtras = data['extras']
+    content = data['content']
 
     KEYBLIP = request.headers.get('Authorization')
     namespace = request.headers.get('namespace')
@@ -280,7 +313,7 @@ def send():
 
         return jsonify ({"erro":"Authorization não encontrado"})
 
-    #identifica caso name sapce não exista
+    #identifica caso namesapce não exista
     if(namespace == "" or namespace == None):
 
         return jsonify ({"erro":"namespace não encontrado"})
@@ -297,16 +330,18 @@ def send():
     data_verification = json.loads(response_verification)
     print("Carrega Informações retornadas no formato de JSON")
 
-    #Verifica Se Existe Nome vinculado a conta
-    if ("fullName" in response_verification):
-
-            name = data_verification ['resource']['fullName']
-
     #Identifica o Identity do número no whatsapp       
     identity = data_verification ['resource']['alternativeAccount']
 
-    #Enviar Notificação
-    response_notification = send_notification(URLBLIP = URLBLIP,KEYBLIP = KEYBLIP,namespace = namespace, template_name = template_name, identity = identity)
+    if content == None:
+
+        #Enviar Notificação Sem Variaveis
+        response_notification = send_notification(URLBLIP = URLBLIP,KEYBLIP = KEYBLIP,namespace = namespace, template_name = template_name, identity = identity)
+
+    if content != None:
+
+         #Enviar Notificação Sem Variaveis
+        response_notification = send_notification_components(URLBLIP = URLBLIP,KEYBLIP = KEYBLIP,namespace = namespace, template_name = template_name, identity = identity, components = content)
 
     #Levar o Cliente para o bloco correto
     response_state = change_state(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, state_id = state_id, flow_id = flow_id)
