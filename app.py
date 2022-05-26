@@ -338,9 +338,9 @@ def send():
         #Enviar Notificação Sem Variaveis
         response_notification = send_notification(URLBLIP = URLBLIP,KEYBLIP = KEYBLIP,namespace = namespace, template_name = template_name, identity = identity)
 
-    if content != None:
+    else:
 
-         #Enviar Notificação Sem Variaveis
+        #Enviar Notificação Sem Variaveis
         response_notification = send_notification_components(URLBLIP = URLBLIP,KEYBLIP = KEYBLIP,namespace = namespace, template_name = template_name, identity = identity, components = content)
 
     #Levar o Cliente para o bloco correto
@@ -372,7 +372,7 @@ def send():
 
     return jsonify (data_response)
 
-#Modelo de Body Esperado
+#Modelo de Body Esperado sem variaveis no template
 #{
 #    "phone": "11 956927573",
 #    "name": "Pedro Mourão",
