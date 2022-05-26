@@ -67,7 +67,7 @@ def send_notification_components(URLBLIP ,KEYBLIP, namespace, template_name, ide
     print("Faz Requisição")
     BlipResp = request.urlopen(BlipReq).read().decode()
 
-    return payBlip
+    return BlipResp
    
 
 #requisição que registra o evento com dados do envio
