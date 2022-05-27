@@ -56,7 +56,7 @@ def send_notification_components(URLBLIP ,KEYBLIP, namespace, template_name, ide
         "namespace":namespace,
         "language":{
         "code":"pt_BR",
-        "policy":"deterministic",
+        "policy":"deterministic"},
         "name":template_name,
         "components":[{
         "type": "body",
@@ -77,7 +77,7 @@ def send_notification_components(URLBLIP ,KEYBLIP, namespace, template_name, ide
         ]
       }]
 
-    }}}
+    }}
   
     }).encode('utf-8')
     print(payBlip)
