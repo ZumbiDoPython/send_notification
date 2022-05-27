@@ -337,10 +337,14 @@ def send():
     #Identifica o Identity do número no whatsapp       
     identity = data_verification ['resource']['alternativeAccount']
 
+
+    print(content)
+
     if content == None:
 
         #Enviar Notificação Sem Variaveis
         response_notification = send_notification(URLBLIP = URLBLIP,KEYBLIP = KEYBLIP,namespace = namespace, template_name = template_name, identity = identity)
+        print("Sem Content")
 
     else:
 
