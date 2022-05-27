@@ -63,6 +63,7 @@ def send_notification_components(URLBLIP ,KEYBLIP, namespace, template_name, ide
     }}}
   
     }).encode('utf-8')
+    print(payBlip)
     print("Monta Requisição")
     BlipReq = request.Request(URLBLIP[1],data = payBlip, headers={'content-type': 'application/json', 'Authorization': KEYBLIP})
     print("Faz Requisição")
@@ -348,11 +349,11 @@ def send():
 
     else:
 
-        component.append(content)
+        
         print(content)
-        print(component)
+       
         #Enviar Notificação Sem Variaveis
-        response_notification = send_notification_components(URLBLIP = URLBLIP,KEYBLIP = KEYBLIP,namespace = namespace, template_name = template_name, identity = identity, components = component)
+        response_notification = send_notification_components(URLBLIP = URLBLIP,KEYBLIP = KEYBLIP,namespace = namespace, template_name = template_name, identity = identity, components = content)
 
     #Levar o Cliente para o bloco correto
     response_state = change_state(URLBLIP = URLBLIP, KEYBLIP = KEYBLIP,identity = identity, state_id = state_id, flow_id = flow_id)
