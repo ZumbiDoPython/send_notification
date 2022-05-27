@@ -345,6 +345,8 @@ def send():
     else:
 
         component.append(content)
+        print(content)
+        print(component)
         #Enviar Notificação Sem Variaveis
         response_notification = send_notification_components(URLBLIP = URLBLIP,KEYBLIP = KEYBLIP,namespace = namespace, template_name = template_name, identity = identity, components = component)
 
