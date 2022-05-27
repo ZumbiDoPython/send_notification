@@ -1,4 +1,4 @@
-from msilib.schema import Component
+
 import os
 import json
 import uuid
