@@ -58,24 +58,7 @@ def send_notification_components(URLBLIP ,KEYBLIP, namespace, template_name, ide
         "code":"pt_BR",
         "policy":"deterministic"},
         "name":template_name,
-        "components":[{
-        "type": "body",
-        "parameters": [
-          {
-            "type": "text",
-            "text": "3"
-          },
-          {
-            "type": "text",
-            "text": "3"
-          },
-          {
-           
-            "type": "text",
-            "text": "3"
-          }
-        ]
-      }]
+        "components":components
 
     }}
   
